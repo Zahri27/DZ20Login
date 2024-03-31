@@ -4,26 +4,28 @@ public class User {
 
     public User(String login, String password) {
         this.login = login;
-        this.account = new Account(password);
-    }
-
-    public void displayAccount() {
-        System.out.println("Account Login successful! Login: " + login + ", Password: " + account.getPassword());
+        this.account = new Account(password, this);
     }
 
     public Account getAccount() {
         return account;
     }
 
-    public class Account {
-        private String password;
+    String getLogin() {
+        return login;
+    }
+}
 
-        public Account(String password) {
-            this.password = password;
-        }
+class Account {
+    private String password;
+    private User user;
 
-        public String getPassword() {
-            return password;
-        }
+    public Account(String password, User user) {
+        this.password = password;
+        this.user = user;
+    }
+
+    public void displayAccount() {
+        System.out.println("Account Login successful! Login: " + user.getLogin() + ", Password: " + password);
     }
 }
